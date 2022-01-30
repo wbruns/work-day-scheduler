@@ -1,5 +1,5 @@
 // get the current time
-var currentHour = moment().hour(12);
+var currentHour = moment().hour(13);
 console.log(moment().hour());
 
 // check current time to each timeblock
@@ -31,15 +31,17 @@ var timeOfDay = function() {
     // grab second child
     var secondChild = timeBlock.children[1];
     
-
+    console.log(timeBlockMoment.diff(currentHour, 'hours'));
     // check against current time
     if (timeBlockMoment.isBefore(currentHour)) {
       // if in the past
       secondChild.classList.add("bg-light");
-    } else if (timeBlockMoment.isAfter(currentHour)) {
-      secondChild.classList.add("bg-success");
-    } else {
+    } else if (timeBlockMoment.diff(currentHour, 'hours') < 1) {
+      // if this hour
       secondChild.classList.add("bg-danger");
+    } else {
+      // if in future
+      secondChild.classList.add("bg-success");
     }
   }
 };
