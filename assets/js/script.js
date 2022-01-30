@@ -1,5 +1,7 @@
 // get the current time
 var currentHour = moment().hour(13);
+// for storing events
+var events = {};
 
 // check current time to each timeblock
 var timeOfDay = function() {
@@ -34,6 +36,31 @@ var timeOfDay = function() {
       secondChild.classList.add("future");
     }
   }
+};
+
+// load saved events
+var loadEvents = function() {
+  events = JSON.parse(localStorage.getItem("events"));
+
+  // if there is nothing saved, create a new object to track events
+  if (!events) {
+    events = {
+      event9: [],
+      event10: [],
+      event11: [],
+      event12: [],
+      event13: [],
+      event14: [],
+      event15: [],
+      event16: [],
+      event17: []
+    };
+  }
+};
+
+// save events in localStorage
+var saveTasks = function() {
+  localStorage.setItem("events", JSON.stringify(events));
 };
 
 
