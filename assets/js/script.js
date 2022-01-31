@@ -41,7 +41,7 @@ var timeOfDay = function() {
 // load saved events
 var loadEvents = function() {
   events = JSON.parse(localStorage.getItem("events"));
-
+  console.log(events);
   // if there is nothing saved, create a new object to track events
   if (!events) {
     events = {
@@ -56,21 +56,37 @@ var loadEvents = function() {
       event17: []
     };
   }
+
+  
 };
 
 // save events in localStorage
-var saveTasks = function() {
+var saveEvents = function() {
   localStorage.setItem("events", JSON.stringify(events));
+  console.log(events);
 };
 
-
-
-
 timeOfDay();
+
+loadEvents();
 // all jquery should go in the document.ready so that it doesn't load until
 // the html has loaded
 $(document).ready(function() {
   
   $("#currentDay").text(moment().format('dddd, MMM D'));
+
+  // save button clicked
+  $(".saveBtn").click(function() {
+    // get the timeblock by id
+    var event = $(this).prev().find("textarea").attr("name");
+    
+    // get the textarea value
+    var text = $(this).prev().find("textarea").val();
+
+    // send text into events object with key of 'event'
+    events[event] = text;
+    
+    saveEvents();
+  });
 
 });
