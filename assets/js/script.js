@@ -1,5 +1,5 @@
 // get the current time
-var currentHour = moment().hour();
+var currentHour = moment().hour(13);
 // for storing events
 var events = {};
 
@@ -69,9 +69,6 @@ var loadEvents = function() {
     event.value = events["event" + (i + 9)];
     event.innerText = events["event" + (i + 9)];
     event.innerHTML = events["event" + (i + 9)];
-    // console.log(events["event" + (i + 9)]);
-    // event.value = text;
-
   };
   
 };
