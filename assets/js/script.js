@@ -1,5 +1,5 @@
 // get the current time
-var currentHour = moment().hour(13);
+var currentHour = moment().hour();
 // for storing events
 var events = {};
 
@@ -40,8 +40,9 @@ var timeOfDay = function() {
 
 // load saved events
 var loadEvents = function() {
+  // parse localStorage string back into an object
   events = JSON.parse(localStorage.getItem("events"));
-  console.log(events);
+  
   // if there is nothing saved, create a new object to track events
   if (!events) {
     events = {
@@ -56,12 +57,28 @@ var loadEvents = function() {
       event17: []
     };
   }
+  // loop over saved object info
+  for (var i = 0; i < 9; i++) {
+    // get the textarea
+    var event = document.getElementsByName("event" + (i + 9));
+    console.log(event);
+    // get the stored text
+    var text = events["event" + (i + 9)]
+    
+    // put stored text into the textarea
+    event.value = events["event" + (i + 9)];
+    event.innerText = events["event" + (i + 9)];
+    event.innerHTML = events["event" + (i + 9)];
+    // console.log(events["event" + (i + 9)]);
+    // event.value = text;
 
+  };
   
 };
 
 // save events in localStorage
 var saveEvents = function() {
+  // make events object a string to store it
   localStorage.setItem("events", JSON.stringify(events));
   console.log(events);
 };
